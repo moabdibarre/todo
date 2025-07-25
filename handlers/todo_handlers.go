@@ -28,7 +28,21 @@ func (h *TodoHandler)CreateToDo(w http.ResponseWriter, r *http.Request) {
 		return	
 	}
 
-	//response
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(todo)
+	
+}
+
+func (h *TodoHandler) GetToDo(w http.ResponseWriter, r *http.Request) {
+	
+	// call service layer
+	todos, err := h.Service.GetTodo()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return	
+	}
+
+
+	//send response
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(todos)
 }
