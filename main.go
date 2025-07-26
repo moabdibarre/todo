@@ -14,7 +14,7 @@ import (
 
 func main() {
 
-	db.InitDB()
+	db.Initdb()
 	// initialising repo
 	userREpo := &repository.UserRepo{}
 	todoRepo := &repository.TodoRepo{}
